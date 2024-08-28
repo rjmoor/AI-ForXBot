@@ -1,8 +1,4 @@
-Here's a detailed `README.md` for your Forex trading system, tailored for RMoor Industries Ltd Co.:
-
----
-
-# Forex Trading System
+# RMoor Industries & Securities Forex Trading System
 
 ## Overview
 
