@@ -1,0 +1,6 @@
+
+backend/.env
+.DS_Store
+/tests
+/backend/tests
+/backend/config/secrets
