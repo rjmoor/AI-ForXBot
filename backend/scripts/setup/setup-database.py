@@ -47,7 +47,7 @@ if __name__ == '__main__':
     # Initialize specified database or all databases
     if db_name is None:
         for db_file in databases.values():
-            logger.info(f"Initializing '{db_key}' database...")
+            logger.info(f"Initializing '{db_name}' database...")
             print(f"Initializing database '{db_file}'...")
             main(db_name=db_file, db_type=db_type)
     elif db_name in databases.values():
