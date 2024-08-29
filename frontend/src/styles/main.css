@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+#charts {
+    display: flex;
+    justify-content: space-around;
+}
+
+#charts > div {
+    width: 30%;
+    height: 300px;
+    border: 1px solid #ddd;
+    margin: 1em 0;
+}
+
+#controls {
+    margin-top: 1em;
+}
+
+button {
+    margin-right: 1em;
+}

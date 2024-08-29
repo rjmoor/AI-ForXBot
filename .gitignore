@@ -4,3 +4,4 @@ backend/.env
 /tests
 /backend/tests
 /backend/config/secrets
+*.pyc
