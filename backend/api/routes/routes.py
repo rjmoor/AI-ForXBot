@@ -54,7 +54,7 @@ def settings():
     elif request.method == 'POST':
         new_settings = request.json
         # Add logic to update settings
-        return jsonify({'message': 'Settings updated'}), 200
+        return jsonify({'message': f'Settings updated to {new_settings}' }), 200
 
 # Trading performance endpoint
 @bp.route('/performance', methods=['GET'])
