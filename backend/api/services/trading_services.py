@@ -1,6 +1,7 @@
 import threading
 import time
 from trading.managers import manager
+from trading.brokers.oanda_client import OandaClient
 
 '''
 Handles requests and interacts with services. Contains the core service logic.
@@ -34,6 +35,24 @@ class TradingService:
             self.is_trading = False
             if self.trade_thread:
                 self.trade_thread.join()  # Wait for the trading thread to finish
+                
+    def log_trade(self, trade_data):
+        db = get_database('trading_db')
+        trades_collection = db['trades']
+        result = trades_collection.insert_one(trade_data)
+        return result.inserted_id
+
+    def place_trade(self, trade_data):
+        # Implement trade placement logic with the broker here...
+        
+        # For example, using the OandaClient
+        oanda_client = OandaClient()
+        oanda_response = oanda_client.place_order(trade_data)
+        
+        # Log the trade in MongoDB
+        self.log_trade(trade_data)
+        
+        return oanda_response
 
     def get_status(self):
         """

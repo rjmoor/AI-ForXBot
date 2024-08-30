@@ -1,15 +1,32 @@
 import pandas as pd
+import numpy as np
+from logs.log_manager import LogManager
 
-def calculate_macd(df, df_ema_12, df_ema_26):
+logger = LogManager('macd_logs').get_logger()
+
+def calculate_macd(df, short_period=12, long_period=26, signal_period=9):
     """
     Calculate the Moving Average Convergence Divergence (MACD) for a given DataFrame.
-    
+
     :param df: DataFrame with 'close' prices.
-    :param df_ema_12: DataFrame with 12-period Exponential Moving Average (EMA) values.
-    :param df_ema_26: DataFrame with 26-period Exponential Moving Average (EMA) values.
+    :param short_period: Short period for MACD calculation.
+    :param long_period: Long period for MACD calculation.
+    :param signal_period: Signal period for MACD calculation.
     :return: DataFrame with MACD values.
     """
-    df['macd'] = df_ema_12['ema_12'] - df_ema_26['ema_26']
-    df['signal'] = df['macd'].ewm(span=9, adjust=False).mean()
+    if len(df) < long_period:
+        logger.warning("Insufficient data for MACD calculation.")
+        return df
+
+    if short_period <= 0 or long_period <= 0 or signal_period <= 0:
+        logger.error("Invalid period(s). Periods must be positive.")
+        raise ValueError("Periods must be positive")
+
+    df['ema_short'] = df['close'].ewm(span=short_period, adjust=False).mean()
+    df['ema_long'] = df['close'].ewm(span=long_period, adjust=False).mean()
+    df['macd'] = df['ema_short'] - df['ema_long']
+    df['signal'] = df['macd'].ewm(span=signal_period, adjust=False).mean()
     df['histogram'] = df['macd'] - df['signal']
+
+    logger.info("MACD calculation completed.")
     return df

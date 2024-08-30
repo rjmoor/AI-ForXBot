@@ -1,0 +1,11 @@
+2024-08-30 01:30:26,104 - vwap_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 01:36:22,003 - vwap_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:02:31,095 - vwap_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:07:51,375 - vwap_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:11:02,200 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:21:52,937 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:22:41,962 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:23:17,764 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:33:17,089 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:37:21,081 - vwap_logs - INFO - VWAP calculation completed.
+2024-08-30 02:37:50,786 - vwap_logs - INFO - VWAP calculation completed.

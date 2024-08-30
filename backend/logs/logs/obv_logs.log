@@ -1,0 +1,11 @@
+2024-08-30 01:30:26,091 - obv_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 01:36:21,999 - obv_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:02:31,091 - obv_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:07:51,372 - obv_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:11:02,197 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:21:52,930 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:22:41,729 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:23:17,761 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:33:17,087 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:37:21,078 - obv_logs - INFO - OBV calculation completed.
+2024-08-30 02:37:50,783 - obv_logs - INFO - OBV calculation completed.

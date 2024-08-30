@@ -1,4 +1,8 @@
 import pandas as pd
+import numpy as np
+from logs.log_manager import LogManager
+
+logger = LogManager('macd_logs').get_logger()
 
 def calculate_atr(df, df_original, period=14):
     """
@@ -8,11 +12,19 @@ def calculate_atr(df, df_original, period=14):
     :param period: Period for ATR calculation.
     :return: DataFrame with ATR values.
     """
-    df['h-l'] = df['high'] - df['low']
-    df['h-yc'] = abs(df['high'] - df['close'].shift())
-    df['l-yc'] = abs(df['low'] - df['close'].shift())
-    df['tr'] = df[['h-l', 'h-yc', 'l-yc']].max(axis=1)
-    df['atr'] = df['tr'].rolling(window=period).mean()
-    df = df.drop(['h-l', 'h-yc', 'l-yc', 'tr'], axis=1)
-    df = pd.concat([df_original, df['atr']], axis=1)
+    if len(df) < period:
+        logger.warning("Insufficient data for ATR calculation.")
+        return df
+
+    if period <= 0:
+        logger.error(f"Invalid period: {period}. Period must be positive.")
+        raise ValueError("Period must be positive")
+
+    df['high-low'] = df['high'] - df['low']
+    df['high-close'] = (df['high'] - df['close'].shift()).abs()
+    df['low-close'] = (df['low'] - df['close'].shift()).abs()
+    df['true_range'] = np.max([df['high-low'], df['high-close'], df['low-close']], axis=0)
+    df['atr'] = df['true_range'].ewm(span=period, adjust=False).mean()
+
+    logger.info("ATR calculation completed.")
     return df

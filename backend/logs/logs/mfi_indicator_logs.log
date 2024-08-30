@@ -1,0 +1,11 @@
+2024-08-30 01:30:26,089 - mfi_indicator_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 01:36:21,998 - mfi_indicator_logs - ERROR - Volume column missing from DataFrame.
+2024-08-30 02:02:31,091 - mfi_indicator_logs - ERROR - Missing column: high
+2024-08-30 02:07:51,371 - mfi_indicator_logs - ERROR - Missing column: volume
+2024-08-30 02:11:02,196 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:21:52,927 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:22:41,723 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:23:17,759 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:33:17,084 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:37:21,076 - mfi_indicator_logs - INFO - MFI calculation completed.
+2024-08-30 02:37:50,781 - mfi_indicator_logs - INFO - MFI calculation completed.
