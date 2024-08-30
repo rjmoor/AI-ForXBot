@@ -21,7 +21,7 @@ def calculate_rsi(df, period=14):
         raise ValueError("Period must be positive")
 
     df['delta'] = df['close'].diff()
-    df['gain'] = df['delta'].apply(lambda x: x if x > 0 else 0)
+    df['gain'] = df['delta'].apply(lambda x: max(x, 0))
     df['loss'] = df['delta'].apply(lambda x: -x if x < 0 else 0)
 
     avg_gain = df['gain'].rolling(window=period, min_periods=1).mean()

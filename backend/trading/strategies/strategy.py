@@ -1,5 +1,5 @@
-from indicators.rsi import calculate_rsi
-from indicators.sma import calculate_sma
+from trading.indicators.rsi import calculate_rsi
+from trading.indicators.sma import calculate_sma
 
 '''
 This file will contain the implementation of the trading strategies.

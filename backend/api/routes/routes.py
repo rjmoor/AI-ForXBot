@@ -1,8 +1,13 @@
 from flask import Blueprint, Flask, jsonify, request
+from logs.log_manager import LogManager
+from api.services.trading_services import TradingService as trading_service
 
 '''
 Creates the Flask app and registers the blueprints. Defines the API routes.
 '''
+
+# Initialize the LogManager
+logger = LogManager('api_routes')
 
 # Define the main blueprint
 main = Blueprint('main', __name__)
@@ -25,6 +30,32 @@ def status():
     Returns a status message indicating that the API is active.
     """
     return jsonify({'status': 'active'}), 200
+
+@bp.route('/order', methods=['POST'])
+def place_order():
+    """
+    Places a new order by calling the TradingService's place_trade method.
+    The order data is expected to be in the JSON body of the request.
+
+    :return: A JSON response containing the details of the placed order or an error message.
+    """
+    try:
+        # Extract trade data from the incoming request
+        trade_data = request.json
+
+        # Call the TradingService's place_trade method
+        oanda_response = trading_service.place_trade(trade_data)
+
+        if oanda_response is not None:
+            logger.info(f"Trade placed successfully: {oanda_response}")
+            return jsonify(oanda_response), 201
+        else:
+            logger.error("Failed to place trade.")
+            return jsonify({'error': 'Failed to place trade.'}), 500
+
+    except Exception as e:
+        logger.error(f"Error processing trade: {e}")
+        return jsonify({'error': str(e)}), 500
 
 # Start trading endpoint
 @bp.route('/start', methods=['POST'])
@@ -75,17 +106,17 @@ def trade_history():
     return jsonify(trade_history_data), 200
 
 # Define the create_app function
+"""
+Initializes the Flask app and registers the blueprints.
+"""
 def create_app():
-    """
-    Initializes the Flask app and registers the blueprints.
-    """
     app = Flask(__name__)
     # Register the blueprints
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(bp, url_prefix='/api')
     
     # Optionally, print the URL rules to verify routing
-    for rule in app.url_map.iter_rules():
-        print(rule)
+    for endpoint in app.url_map.iter_rules():
+        print(endpoint)
     
     return app

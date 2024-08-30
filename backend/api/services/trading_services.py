@@ -1,7 +1,10 @@
 import threading
 import time
-from trading.managers import manager
+
+from logs.log_manager import LogManager
 from trading.brokers.oanda_client import OandaClient
+from trading.managers import manager
+from data.repositories.mongo import get_database
 
 '''
 Handles requests and interacts with services. Contains the core service logic.
