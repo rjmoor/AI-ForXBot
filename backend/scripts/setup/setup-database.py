@@ -1,6 +1,6 @@
 import os
 import sys
-from data.repositories.database import initialize_db
+from data.repositories.sqlite3 import initialize_db
 from logs.log_manager import LogManager  # Import the LogManager class
 
 # Initialize logger for database setup

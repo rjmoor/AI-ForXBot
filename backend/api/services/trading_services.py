@@ -4,7 +4,7 @@ import time
 from logs.log_manager import LogManager
 from trading.brokers.oanda_client import OandaClient
 from trading.managers import manager
-from data.repositories.mongo import get_database
+from data.repositories.mongo import _get_mongo_client
 
 '''
 Handles requests and interacts with services. Contains the core service logic.
@@ -40,7 +40,7 @@ class TradingService:
                 self.trade_thread.join()  # Wait for the trading thread to finish
                 
     def log_trade(self, trade_data):
-        db = get_database('trading_db')
+        db = _get_mongo_client('trading_db')
         trades_collection = db['trades']
         result = trades_collection.insert_one(trade_data)
         return result.inserted_id

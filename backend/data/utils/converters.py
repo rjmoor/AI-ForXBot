@@ -1,9 +1,9 @@
 import pymongo
 from urllib.parse import quote_plus
 
-username = quote_plus('<username>')
-password = quote_plus('<password>')
-cluster = '<clusterName>'
+username = quote_plus('rjmoore')
+password = quote_plus('Anubis2030')
+cluster = 'dashxbot'
 authSource = '<authSource>'
 authMechanism = '<authMechanism>'
 
