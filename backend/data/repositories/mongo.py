@@ -1,12 +1,16 @@
-# data/repositories/mongo_connection.py
+# backend/data/repositories/mongo.py
 import os
+from config.secrets import defs
 from pymongo import MongoClient, errors
 from logs.log_manager import LogManager
+from trading.brokers.oanda_client import OandaClient
 
 # Initialize the logger
 logger = LogManager('mongo_connection_logs').get_logger()
 
 class MongoDBHandler:
+    _client = None
+
     def __init__(self, db_name, collection_name=None):
         """
         Initializes the MongoDBHandler with a connection to the specified database and optionally a collection.
@@ -14,24 +18,84 @@ class MongoDBHandler:
         :param db_name: The name of the database to connect to.
         :param collection_name: The name of the collection to interact with (optional).
         """
-        self.mongo_url = os.getenv('MONGO_URL', 'mongodb+srv://rjmoore:Anubis2030@dashxbot.q034as0.mongodb.net/')
-        self.client = self._get_mongo_client()
+        self.mongo_url = os.getenv('MONGO_URL', defs.MONGO_URI)
+        self.client = MongoDBHandler._get_mongo_client(self.mongo_url)
+        self.oanda_client = OandaClient()
+        self.db_name = db_name
         self.db = self.client[db_name]
         self.collection = self.db[collection_name] if collection_name else None
 
-    def _get_mongo_client(self):
+    @staticmethod
+    def _get_mongo_client(mongo_url):
         """
-        Establishes a connection to MongoDB using the MongoDB URL from environment variables.
-        Returns a MongoClient instance.
+        Establishes a reusable connection to MongoDB using the MongoDB URL.
+        Returns a MongoClient instance if not already connected.
+        """
+        if MongoDBHandler._client is None:
+            try:
+                client = MongoClient(mongo_url, serverSelectionTimeoutMS=500)  # 5 seconds timeout
+                # Check if the server is available
+                client.admin.command('ping')
+                logger.info(f"Connected to MongoDB at {mongo_url}")
+                MongoDBHandler._client = client
+            except errors.ServerSelectionTimeoutError as err:
+                logger.error(f"Failed to connect to MongoDB: {err}")
+                raise
+        return MongoDBHandler._client
+
+    def collection_exists(self, collection_name):
+        """
+        Checks if a collection exists in the database.
+        
+        :param collection_name: The name of the collection to check.
+        :return: True if the collection exists, False otherwise.
+        """
+        return collection_name in self.db.list_collection_names()
+
+    def switch_collection(self, collection_name):
+        """
+        Switches to a different collection within the same database.
+        Creates the collection if it doesn't exist.
+        
+        :param collection_name: The name of the collection to switch to.
+        """
+        if self.collection_exists(collection_name) is None:
+            self.db.create_collection(collection_name)
+            logger.info(f"Created new collection: {collection_name}")
+        self.collection = self.db[collection_name]
+        logger.info(f"Switched to collection: {collection_name}")
+
+    def short_bulk_insert(self, documents):
+        """
+        Inserts multiple documents into the current collection.
+        :param documents: A list of documents to insert.
         """
         try:
-            client = MongoClient(self.mongo_url, serverSelectionTimeoutMS=5000)  # 5 seconds timeout
-            # Check if the server is available
-            client.admin.command('ping')
-            logger.info(f"Connected to MongoDB at {self.mongo_url}")
-            return client
-        except errors.ServerSelectionTimeoutError as err:
-            logger.error(f"Failed to connect to MongoDB: {err}")
+            if documents:
+                self.collection.insert_many(documents, ordered=False)  # Perform unordered insert to improve speed
+                logger.info(f"Inserted {len(documents)} documents into {self.collection.name}")
+            else:
+                logger.warning(f"No documents to insert into {self.collection.name}")
+        except errors.PyMongoError as err:
+            logger.error(f"Short Bulk insert failed: {err}")
+            raise
+
+    def long_bulk_insert(self, documents):
+        """
+        Inserts multiple documents into the current collection, printing each document inserted.
+        :param documents: A list of documents to insert.
+        """
+        try:
+            if documents:
+                for doc in documents:
+                    self.collection.insert_one(doc)
+                    # Print each document inserted to the console
+                    print(f"Inserted document with time: {doc['time']} into {self.collection.name}")
+                    logger.info(f"Inserted document with time: {doc['time']} into {self.collection.name}")
+            else:
+                logger.warning(f"No documents to insert into {self.collection.name}")
+        except errors.PyMongoError as err:
+            logger.error(f"Long Bulk insert failed: {err}")
             raise
 
     def create_collection(self, collection_name):
@@ -103,6 +167,9 @@ class MongoDBHandler:
             result = self.collection.insert_one(document)
             logger.info(f"Document inserted with ID: {result.inserted_id}")
             return result.inserted_id
+        except errors.DuplicateKeyError as err:
+            logger.warning(f"Duplicate document error: {err}")
+            return None
         except errors.PyMongoError as err:
             logger.error(f"Failed to insert document: {err}")
             raise
@@ -114,6 +181,9 @@ class MongoDBHandler:
         :param query: A dictionary representing the query to match documents.
         :return: A list of matched documents.
         """
+        if self.collection is None:
+            raise ValueError("No MongoDB collection is set.")
+        
         try:
             documents = self.collection.find(query or {})
             results = list(documents)
@@ -158,9 +228,106 @@ class MongoDBHandler:
         """
         Closes the MongoDB connection.
         """
+        if MongoDBHandler._client:
+            try:
+                MongoDBHandler._client.close()
+                MongoDBHandler._client = None
+                logger.info("MongoDB connection closed.")
+            except errors.PyMongoError as err:
+                logger.error(f"Failed to close MongoDB connection: {err}")
+                raise
+        
+    def ensure_database_exists(self):
+        """
+        Ensures that the database exists by attempting to switch to it.
+        """
         try:
-            self.client.close()
-            logger.info("MongoDB connection closed.")
+            self.db = self.client[self.db_name]
+            logger.info(f"Using database: {self.db_name}")
         except errors.PyMongoError as err:
-            logger.error(f"Failed to close MongoDB connection: {err}")
+            logger.error(f"Failed to create or switch to database '{self.db_name}': {err}")
             raise
+
+    def ensure_collection_exists_and_populate(self, instrument, granularity="D", count=500):
+        """
+        Ensure the MongoDB collection exists and populate it with historical data.
+
+        :param instrument: The forex pair (e.g., "EUR_USD").
+        :param granularity: The timeframe (e.g., "M1", "D", "H1").
+        :param count: The number of data points to fetch.
+        """
+        try:
+            # Prepare collection name based on instrument and granularity
+            collection_name = f"{instrument.lower()}_{granularity.lower()}_data"
+            
+            # Ensure the collection is created and indexed
+            self.create_collection_with_index(collection_name, index_field="time")
+            
+            # Fetch and store data if collection does not already exist
+            self.populate_historical_data(instrument, granularity, count)
+        
+        except Exception as e:
+            logger.error(f"Error ensuring collection and populating data for {instrument}: {e}")
+            raise
+
+    def create_collection_with_index(self, collection_name, index_field="time"):
+        """
+        Creates a new collection with an index on a specific field if it doesn't already exist.
+        
+        :param collection_name: The name of the collection to create.
+        :param index_field: The field to index (default is 'time').
+        """
+        if collection_name not in self.db.list_collection_names():
+            # Create the collection
+            self.db.create_collection(collection_name)
+            logger.info(f"Created collection: {collection_name}")
+            # Switch to the collection and create an index on the 'time' field
+            self.collection = self.db[collection_name]
+            
+            if self.collection is None:
+                raise ValueError(f"Failed to create or switch to collection: {collection_name}")
+            
+            self.collection.create_index([(index_field, 1)], unique=True)
+            logger.info(f"Created index on '{index_field}' for collection {collection_name}")
+            
+    def populate_historical_data(self, instrument, granularity="D", count=5000):
+        """
+        Fetch and store historical data for a given forex instrument.
+        :param instrument: The forex pair (e.g., "EUR_USD").
+        :param granularity: The timeframe (e.g., "M1", "D", "H1").
+        :param count: The number of data points to fetch.
+        """
+        try:
+            # Ensure the instrument symbol is in uppercase, as expected by the OANDA API
+            instrument = instrument.upper()
+
+            # Ensure collection exists and set it
+            collection_name = f"{instrument.lower()}_{granularity.lower()}_data"
+            # Ensure collection exists before querying and switch to it
+            self.create_collection_with_index(collection_name, index_field="time")
+            self.switch_collection(collection_name)  # Ensure collection is set
+
+
+            # Fetch historical data from OANDA
+            data = self.oanda_client.fetch_historical_data(instrument, granularity, count)
+
+            # Check if data is returned and proceed
+            if not data:
+                self.logger.warning(f"No data received for {instrument} with granularity {granularity}.")
+                return
+
+            # Ensure collection is set before read operation or create new collection
+            if self.collection is None:
+                raise ValueError(f"MongoDB collection for {collection_name} is not set.")
+
+            if new_data := list(data):
+                self.short_bulk_insert(new_data)
+                logger.info(f"Inserted {len(new_data)} new data points for {instrument} in {granularity} timeframe.")
+            else:
+                logger.info(f"No new data to insert for {instrument} in {granularity} timeframe.")
+
+        except Exception as e:
+            # Log any error during the population process
+            logger.error(f"Error populating data for {instrument}: {e}")
+            raise
+

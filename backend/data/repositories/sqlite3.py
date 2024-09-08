@@ -20,7 +20,7 @@ def initialize_db(db_type='sqlite', db_name=None):
     :param db_name: The name of the database file.
     """
     # Define the directory for databases
-    databases_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'databases')
+    databases_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../databases')
 
     # Ensure the directory exists
     if not os.path.exists(databases_dir):

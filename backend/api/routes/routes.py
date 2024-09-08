@@ -1,6 +1,8 @@
+# backend/api/routes/routes.py
 from flask import Blueprint, Flask, jsonify, request
 from logs.log_manager import LogManager
 from api.services.trading_services import TradingService as trading_service
+from api.services.data_population_service import DataPopulationService
 
 '''
 Creates the Flask app and registers the blueprints. Defines the API routes.
@@ -9,11 +11,17 @@ Creates the Flask app and registers the blueprints. Defines the API routes.
 # Initialize the LogManager
 logger = LogManager('api_routes')
 
-# Define the main blueprint
+# Define the main and API blueprints
 main = Blueprint('main', __name__)
-
-# Define the API blueprint
 bp = Blueprint('api', __name__)
+dp = Blueprint('data_population', __name__)
+
+# Initialize services
+data_population_service = DataPopulationService()
+# Ensure all historical data is populated on startup
+data_population_service.populate_all_instruments()
+# Schedule the updates every minute
+# data_population_service.update_data_every_minute()
 
 # Define your routes for the main blueprint
 @main.route("/", methods=['GET'])
@@ -105,6 +113,16 @@ def trade_history():
     trade_history_data = []  # Replace with actual trade history retrieval logic
     return jsonify(trade_history_data), 200
 
+# Data population route
+@dp.route('/populate_data', methods=['POST'])
+def populate_data():
+    try:
+        data_population_service.populate_all_instruments()
+        return jsonify({"message": "Data population started"}), 200
+    except Exception as e:
+        logger.error(f"Error populating data: {e}")
+        return jsonify({"error": str(e)}), 500
+
 # Define the create_app function
 """
 Initializes the Flask app and registers the blueprints.
@@ -114,6 +132,7 @@ def create_app():
     # Register the blueprints
     app.register_blueprint(main, url_prefix='/')
     app.register_blueprint(bp, url_prefix='/api')
+    app.register_blueprint(dp, url_prefix='/api/data-population')
     
     # Optionally, print the URL rules to verify routing
     for endpoint in app.url_map.iter_rules():

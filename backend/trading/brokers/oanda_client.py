@@ -1,10 +1,9 @@
 import requests
 from config.secrets import defs
+from logs.log_manager import LogManager
 
-'''
-Create a module to handle interactions with the OANDA API.
-The OandaClient class is a wrapper for the OANDA API, providing methods to interact with it.
-'''
+# Initialize the logger
+logger = LogManager('oanda_client_logs').get_logger()
 
 class OandaClient:
     def __init__(self, environment='practice'):
@@ -16,6 +15,7 @@ class OandaClient:
         self.environment = environment
         self.base_url = defs.OANDA_URL_D if environment == 'practice' else defs.OANDA_URL_L
         self.headers = defs.SECURE_HEADER
+        self.account_id = defs.ACCOUNT_ID
 
     def get_account(self):
         """
@@ -23,9 +23,14 @@ class OandaClient:
 
         :return: A dictionary containing account details.
         """
-        url = f'{self.base_url}/accounts/{defs.ACCOUNT_ID}'
-        response = requests.get(url, headers=self.headers)
-        return response.json()
+        url = f'{self.base_url}/accounts/{self.account_id}'
+        try:
+            response = requests.get(url, headers=self.headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to retrieve account details: {e}")
+            raise
 
     def place_order(self, order_data):
         """
@@ -34,9 +39,14 @@ class OandaClient:
         :param order_data: A dictionary containing order details.
         :return: A dictionary containing the response from OANDA.
         """
-        url = f'{self.base_url}/accounts/{defs.ACCOUNT_ID}/orders'
-        response = requests.post(url, json=order_data, headers=self.headers)
-        return response.json()
+        url = f'{self.base_url}/accounts/{self.account_id}/orders'
+        try:
+            response = requests.post(url, json=order_data, headers=self.headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to place order: {e}")
+            raise
 
     def get_orders(self):
         """
@@ -44,9 +54,14 @@ class OandaClient:
 
         :return: A dictionary containing the list of open orders.
         """
-        url = f'{self.base_url}/accounts/{defs.ACCOUNT_ID}/orders'
-        response = requests.get(url, headers=self.headers)
-        return response.json()
+        url = f'{self.base_url}/accounts/{self.account_id}/orders'
+        try:
+            response = requests.get(url, headers=self.headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to retrieve orders: {e}")
+            raise
 
     def get_positions(self):
         """
@@ -54,23 +69,39 @@ class OandaClient:
 
         :return: A dictionary containing current positions.
         """
-        url = f'{self.base_url}/accounts/{defs.ACCOUNT_ID}/positions'
-        response = requests.get(url, headers=self.headers)
-        return response.json()
+        url = f'{self.base_url}/accounts/{self.account_id}/positions'
+        try:
+            response = requests.get(url, headers=self.headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to retrieve positions: {e}")
+            raise
 
-    def get_candles(self, instrument, granularity='M1', count=5000):
+    def fetch_historical_data(self, instrument, granularity='M1', count=500):
         """
         Retrieves historical candle data for a specific instrument from OANDA.
 
-        :param instrument: The instrument to retrieve candle data for.
-        :param granularity: The granularity of the candle data (e.g., 'M1' for 1-minute).
+        :param instrument: The instrument to retrieve candle data for (e.g., 'EUR_USD').
+        :param granularity: The granularity of the candle data (e.g., 'M1', 'D').
         :param count: The number of candles to retrieve.
-        :return: A dictionary containing the historical candle data.
+        :return: A list of candle data.
         """
         url = f'{self.base_url}/instruments/{instrument}/candles'
         params = {
             'granularity': granularity,
             'count': count
         }
-        response = requests.get(url, headers=self.headers, params=params)
-        return response.json()
+        try:
+            response = requests.get(url, headers=self.headers, params=params)
+            response.raise_for_status()  # Raise an error for bad responses
+            data = response.json()
+            if 'candles' in data:
+                logger.info(f"Successfully fetched {len(data['candles'])} candles for {instrument}")
+                return data['candles']
+            else:
+                logger.error(f"Unexpected response format: {data}")
+                return []
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Failed to fetch historical data for {instrument}: {e}")
+            raise
