@@ -30,3 +30,32 @@
 2024-09-08 08:46:45,425 - adx_logs - INFO - ADX calculation completed.
 2024-09-08 10:08:17,590 - adx_logs - INFO - ADX calculation completed.
 2024-09-08 11:08:50,472 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 16:43:18,580 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 16:45:37,174 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 16:59:06,030 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:08:11,201 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:19:02,267 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:19:50,042 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:20:50,012 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:21:41,572 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:27:12,267 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:29:59,951 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:31:22,718 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:34:18,188 - adx_logs - INFO - ADX calculation completed.
+2024-09-08 17:35:05,084 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:43,813 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:43,880 - adx_logs - INFO - Inserted ADX results for EUR_USD into SQLite.
+2024-09-14 13:13:43,936 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:43,982 - adx_logs - INFO - Inserted ADX results for GBP_USD into SQLite.
+2024-09-14 13:13:44,039 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:44,086 - adx_logs - INFO - Inserted ADX results for USD_JPY into SQLite.
+2024-09-14 13:13:44,144 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:44,191 - adx_logs - INFO - Inserted ADX results for AUD_USD into SQLite.
+2024-09-14 13:13:44,247 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:44,294 - adx_logs - INFO - Inserted ADX results for USD_CHF into SQLite.
+2024-09-14 13:13:44,352 - adx_logs - INFO - ADX calculation completed.
+2024-09-14 13:13:44,399 - adx_logs - INFO - Inserted ADX results for USD_CAD into SQLite.
+2024-09-15 19:30:14,436 - adx_logs - INFO - ADX calculation for period=5 completed.
+2024-09-18 15:10:04,218 - adx_logs - INFO - ADX calculation for period=5 completed.
+2024-09-18 15:13:19,195 - adx_logs - INFO - ADX calculation for period=5 completed.
+2024-09-18 15:13:19,195 - adx_logs - INFO - ADX calculation for period=5 completed.

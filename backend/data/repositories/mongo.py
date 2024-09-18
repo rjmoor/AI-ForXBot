@@ -174,23 +174,24 @@ class MongoDBHandler:
             logger.error(f"Failed to insert document: {err}")
             raise
 
-    def read(self, query=None):
+    def read(self, query=None, collection_name=None):
         """
         Reads documents from the collection.
 
         :param query: A dictionary representing the query to match documents.
         :return: A list of matched documents.
         """
-        if self.collection is None:
-            raise ValueError("No MongoDB collection is set.")
-        
+        if not collection_name:
+            raise ValueError("Collection name must be specified.")
+
+        collection = self.db[collection_name]
         try:
-            documents = self.collection.find(query or {})
+            documents = collection.find(query or {})
             results = list(documents)
-            logger.info(f"Found {len(results)} documents matching query: {query}")
+            logger.info(f"Found {len(results)} documents in {collection_name}.")
             return results
         except errors.PyMongoError as err:
-            logger.error(f"Failed to read documents: {err}")
+            logger.error(f"Failed to read documents from {collection_name}: {err}")
             raise
 
     def update(self, query, update_values):

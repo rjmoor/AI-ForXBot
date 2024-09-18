@@ -42,3 +42,54 @@
 2024-09-08 08:46:45,439 - rsi_logs - INFO - RSI calculation completed.
 2024-09-08 10:08:17,611 - rsi_logs - INFO - RSI calculation completed.
 2024-09-08 11:08:50,494 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 16:43:18,595 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 16:45:37,186 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 16:59:06,046 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:08:11,215 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:19:02,279 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:19:50,058 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:20:50,024 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:21:41,590 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:27:12,277 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:29:59,962 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:31:22,729 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:34:18,201 - rsi_logs - INFO - RSI calculation completed.
+2024-09-08 17:35:05,095 - rsi_logs - INFO - RSI calculation completed.
+2024-09-13 23:25:27,253 - rsi_logs - INFO - RSI calculation completed.
+2024-09-13 23:36:53,750 - rsi_logs - INFO - RSI calculation completed.
+2024-09-13 23:42:14,318 - rsi_logs - INFO - RSI calculation completed.
+2024-09-13 23:48:33,954 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 00:11:54,039 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 07:08:54,590 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,223 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,260 - rsi_logs - INFO - Inserted RSI results for EUR_USD into SQLite.
+2024-09-14 13:13:48,315 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,343 - rsi_logs - INFO - Inserted RSI results for GBP_USD into SQLite.
+2024-09-14 13:13:48,400 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,428 - rsi_logs - INFO - Inserted RSI results for USD_JPY into SQLite.
+2024-09-14 13:13:48,482 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,511 - rsi_logs - INFO - Inserted RSI results for AUD_USD into SQLite.
+2024-09-14 13:13:48,566 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,594 - rsi_logs - INFO - Inserted RSI results for USD_CHF into SQLite.
+2024-09-14 13:13:48,650 - rsi_logs - INFO - RSI calculation completed.
+2024-09-14 13:13:48,678 - rsi_logs - INFO - Inserted RSI results for USD_CAD into SQLite.
+2024-09-15 18:25:52,451 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:28:06,117 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:31:51,738 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:34:39,310 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:36:48,249 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:39:27,798 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:43:15,775 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:44:59,542 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:47:16,889 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:49:09,049 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 18:50:38,029 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:06:38,622 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:08:55,085 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:10:37,592 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:19:12,326 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:20:29,992 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:21:47,270 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-15 19:30:14,456 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-18 15:10:13,462 - rsi_logs - INFO - RSI calculation for period 10 completed.
+2024-09-18 15:13:19,211 - rsi_logs - INFO - RSI calculation for period 10 completed.

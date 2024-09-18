@@ -7,3 +7,24 @@
 2024-08-30 02:33:17,081 - cci_logs - INFO - CCI calculation completed.
 2024-08-30 02:37:21,073 - cci_logs - INFO - CCI calculation completed.
 2024-08-30 02:37:50,778 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:45,867 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:45,892 - cci_logs - INFO - Inserted CCI results for EUR_USD into SQLite.
+2024-09-14 13:13:45,962 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:45,986 - cci_logs - INFO - Inserted CCI results for GBP_USD into SQLite.
+2024-09-14 13:13:46,058 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:46,082 - cci_logs - INFO - Inserted CCI results for USD_JPY into SQLite.
+2024-09-14 13:13:46,153 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:46,178 - cci_logs - INFO - Inserted CCI results for AUD_USD into SQLite.
+2024-09-14 13:13:46,254 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:46,278 - cci_logs - INFO - Inserted CCI results for USD_CHF into SQLite.
+2024-09-14 13:13:46,350 - cci_logs - INFO - CCI calculation completed.
+2024-09-14 13:13:46,375 - cci_logs - INFO - Inserted CCI results for USD_CAD into SQLite.
+2024-09-15 19:06:38,608 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:08:55,068 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:10:37,581 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:19:12,314 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:20:29,982 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:21:47,252 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-15 19:30:14,445 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-18 15:10:07,700 - cci_logs - INFO - CCI calculation for period=5 completed.
+2024-09-18 15:13:19,201 - cci_logs - INFO - CCI calculation for period=5 completed.

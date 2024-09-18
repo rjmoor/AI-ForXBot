@@ -36,3 +36,76 @@
 2024-09-08 08:46:45,439 - sma_logs - INFO - SMA calculation completed.
 2024-09-08 10:08:17,612 - sma_logs - INFO - SMA calculation completed.
 2024-09-08 11:08:50,494 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 16:43:18,596 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 16:45:37,187 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 16:59:06,047 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:08:11,216 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:19:02,280 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:19:50,058 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:20:50,025 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:21:41,591 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:27:12,278 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:29:59,963 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:31:22,729 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:34:18,202 - sma_logs - INFO - SMA calculation completed.
+2024-09-08 17:35:05,096 - sma_logs - INFO - SMA calculation completed.
+2024-09-13 23:25:27,196 - sma_logs - INFO - SMA calculation completed.
+2024-09-13 23:36:53,682 - sma_logs - INFO - SMA calculation completed.
+2024-09-13 23:42:14,247 - sma_logs - INFO - SMA calculation completed.
+2024-09-13 23:48:33,886 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 00:11:53,977 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 07:08:54,520 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,830 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,898 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,898 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,966 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,966 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:30,966 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,036 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,036 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,036 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,036 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,129 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,129 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,129 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,129 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,129 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 11:59:31,195 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:47,689 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:47,734 - sma_logs - INFO - Inserted SMA results for EUR_USD into SQLite.
+2024-09-14 13:13:47,791 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:47,827 - sma_logs - INFO - Inserted SMA results for GBP_USD into SQLite.
+2024-09-14 13:13:47,881 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:47,910 - sma_logs - INFO - Inserted SMA results for USD_JPY into SQLite.
+2024-09-14 13:13:47,964 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:47,993 - sma_logs - INFO - Inserted SMA results for AUD_USD into SQLite.
+2024-09-14 13:13:48,053 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:48,082 - sma_logs - INFO - Inserted SMA results for USD_CHF into SQLite.
+2024-09-14 13:13:48,136 - sma_logs - INFO - SMA calculation completed.
+2024-09-14 13:13:48,164 - sma_logs - INFO - Inserted SMA results for USD_CAD into SQLite.
+2024-09-15 18:24:02,986 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:25:52,452 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:28:06,120 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:31:51,740 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:34:39,311 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:36:48,249 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:39:27,799 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:43:15,776 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:44:59,542 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:47:16,889 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:49:09,050 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 18:50:38,030 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:06:38,622 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:08:55,085 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:10:37,593 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:19:12,327 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:20:29,993 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:21:47,270 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-15 19:30:14,457 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-18 15:10:14,338 - sma_logs - INFO - SMA calculation for period 5 completed.
+2024-09-18 15:13:19,211 - sma_logs - INFO - SMA calculation for period 5 completed.

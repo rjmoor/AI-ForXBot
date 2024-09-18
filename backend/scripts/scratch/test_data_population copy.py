@@ -1,9 +1,5 @@
-# tests/unit/test_data_population.py
-
 import unittest
-from unittest import TestCase
 from unittest.mock import MagicMock, patch
-
 from api.services.data_population_service import DataPopulationService
 
 
@@ -14,9 +10,9 @@ class TestDataPopulationService(unittest.TestCase):
 
     @patch('api.services.data_population_service.OandaClient')  # Mock the OandaClient class
     @patch('api.services.data_population_service.MongoDBHandler')  # Mock MongoDBHandler
-    def test_populate_historical_data(self, MockMongoDBHandler, MockOandaClient):
+    def test_ensure_collection_exists_and_populate(self, MockMongoDBHandler, MockOandaClient):
         """
-        Test fetching and populating historical data for a specific forex pair.
+        Test ensuring the collection exists and populating historical data for a specific forex pair.
         """
         # Mock the response from fetch_historical_data to return some candles
         mock_oanda_client_instance = MockOandaClient.return_value
@@ -37,9 +33,9 @@ class TestDataPopulationService(unittest.TestCase):
         mock_mongo_handler_instance = MockMongoDBHandler.return_value
         mock_mongo_handler_instance.short_bulk_insert = MagicMock()
         
-        # Call the populate_historical_data method
+        # Call the ensure_collection_exists_and_populate method instead of populate_historical_data
         data_population_service = DataPopulationService()
-        data_population_service.populate_historical_data("EUR_USD", "M1", 500)
+        data_population_service.ensure_collection_exists_and_populate("EUR_USD", "M1", 500)
         
         # Check that bulk_insert was called (meaning data was inserted)
         mock_mongo_handler_instance.short_bulk_insert.assert_called_once()

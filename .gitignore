@@ -9,3 +9,5 @@ backend/.env
 /backend/logs/logs
 /backend/logs
 *.log
+*.log
+*.log

@@ -62,7 +62,7 @@ def place_order():
     :return: A JSON response containing the details of the placed order.
     """
     order_data = request.json
-    response = oanda_client.place_order(order_data)
+    response = OandaClient.place_order(order_data)
     return jsonify(response), 201
 
 @bp.route('/orders', methods=['GET'])
@@ -72,7 +72,7 @@ def get_orders():
 
     :return: A JSON response containing the list of open orders.
     """
-    orders = oanda_client.get_orders()
+    orders = OandaClient.get_orders()
     return jsonify(orders), 200
 
 @bp.route('/positions', methods=['GET'])
@@ -82,7 +82,7 @@ def get_positions():
 
     :return: A JSON response containing the current positions.
     """
-    positions = oanda_client.get_positions()
+    positions = OandaClient.get_positions()
     return jsonify(positions), 200
 
 @bp.route('/candles', methods=['GET'])
@@ -96,7 +96,7 @@ def get_candles():
     instrument = request.args.get('instrument')
     granularity = request.args.get('granularity', 'M1')
     count = int(request.args.get('count', 100))
-    candles = oanda_client.get_candles(instrument, granularity, count)
+    candles = OandaClient.get_candles(instrument, granularity, count)
     return jsonify(candles), 200
 
 @bp.route('/populate_data', methods=['POST'])
