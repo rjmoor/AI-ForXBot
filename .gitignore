@@ -11,3 +11,4 @@ backend/.env
 *.log
 *.log
 *.log
+/backend/logs/logs
